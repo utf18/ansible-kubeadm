@@ -1,0 +1,25 @@
+---
+
+- name: kubeadm init with pre generated token
+  command: kubeadm init --pod-network-cidr {{ flannel_subnet }} --token {{ kubeadm_token }}
+
+- pause:
+    minutes: 3
+    prompt: "Make sure admin pods are started"
+
+- name: allow permissive RBAC rules
+  command: "kubectl --kubeconfig /etc/kubernetes/admin.conf create clusterrolebinding permissive-binding \
+  --clusterrole=cluster-admin \
+  --user=admin \
+  --user=kubelet \
+  --group=system:serviceaccounts"
+
+- name: taint master node
+  command: kubectl --kubeconfig /etc/kubernetes/admin.conf taint nodes --all node-role.kubernetes.io/master-
+
+- name: install flannel pod network
+  command: kubectl --kubeconfig /etc/kubernetes/admin.conf apply -f https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml
+
+- pause:
+    minutes: 3
+    prompt: "Make sure network pods are started"

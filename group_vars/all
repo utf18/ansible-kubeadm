@@ -1,0 +1,8 @@
+
+kubeadm_token: decaf2.c61dd19a426515ec
+
+master_ip: 192.168.56.10
+
+flannel_subnet: 10.244.0.0/16
+
+ansible_remote_user: ben

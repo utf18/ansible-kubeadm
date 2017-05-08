@@ -1,0 +1,22 @@
+---
+# This playbook deploys a simple kubeadm install.
+
+- name: Install Kubernetes master
+  hosts: master
+  remote_user: ben
+  become: yes
+  become_method: sudo
+  roles:
+    - docker
+    - kubeadm
+    - master
+
+- name: Install nodes
+  remote_user: ben
+  hosts: slaves
+  become: yes
+  become_method: sudo
+  roles:
+    - docker
+    - kubeadm
+    - slaves
