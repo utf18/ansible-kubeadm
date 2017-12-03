@@ -1,7 +1,18 @@
 
 [master]
-192.168.56.10
+master1 ansible_ssh_host=192.168.56.10
 
 [slaves]
 192.168.56.11
 192.168.56.12
+
+# To bypass the interactive acceptance of host keys enable the following options.
+# This is an additional security risk, so be sure you are on a secure network.
+# This can be useful if the targets were provisioned automatically and the ansible 
+# host has not logged into the targets before.
+
+# [master:vars]
+# ansible_ssh_common_args='-o StrictHostKeyChecking=no'
+#
+# [slaves:vars]
+# ansible_ssh_common_args='-o StrictHostKeyChecking=no'
