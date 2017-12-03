@@ -22,3 +22,10 @@
     - kubeadm
     - kubectl
     - kubernetes-cni
+
+# Download portmap because kubernetes-cni does not include but flannel needs
+- name: download portmap
+  get_url:
+        url: https://github.com/projectcalico/cni-plugin/releases/download/v1.9.1/portmap
+        dest: /opt/cni/bin/portmap
+        mode: 0755
