@@ -20,6 +20,18 @@
 - name: install flannel pod network
   command: kubectl --kubeconfig /etc/kubernetes/admin.conf apply -f https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml
 
+- name: copy config file to HOME dir
+  command: "{{ item }}"
+  with_items:
+    - cp /etc/kubernetes/admin.conf ~{{ansible_remote_user }}/admin.conf
+    - chown {{ ansible_remote_user }}:{{ ansible_remote_user }} ~{{ansible_remote_user }}/admin.conf
+    - chmod 0400 ~{{ansible_remote_user }}/admin.conf
+
+- name: write KUBECONFGIG to bashrc
+  lineinfile: dest="~{{ansible_remote_user }}/.bashrc" line="{{item}}"
+  with_items:
+     - "export KUBECONFIG=$HOME/admin.conf"
+
 - pause:
     minutes: 3
     prompt: "Make sure network pods are started"
