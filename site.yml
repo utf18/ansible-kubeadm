@@ -19,10 +19,10 @@
 
 - name: Install nodes
   remote_user: ubuntu
-  hosts: slaves
+  hosts: worker
   become: yes
   become_method: sudo
   roles:
     - docker
     - kubeadm
-    - slaves
+    - worker
