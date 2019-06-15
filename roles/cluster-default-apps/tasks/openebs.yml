@@ -1,0 +1,22 @@
+- name: copy over files
+  copy:
+    src: openebs/
+    dest: /tmp/openebs/
+
+# helm template openebs
+- name: helm template openebs
+  shell: |
+    helm template \
+      /tmp/charts/stable/openebs \
+      -f /tmp/openebs/values.yml \
+      > /tmp/openebs/openebs-templated.yml
+  args:
+    executable: /bin/bash
+
+# apply openebs
+- name: kubectl apply /tmp/openebs/openebs-templated.yml
+  shell: "kubectl apply -f /tmp/openebs/openebs-templated.yml"
+
+# create additional storage class for openebs due to replica needed 1 instead of 3 by the default openebs-jiv-default storage class
+- name: kubectl apply /tmp/openebs/storage-class-non-ha.yml
+  shell: "kubectl apply -f /tmp/openebs/storage-class-non-ha.yml"

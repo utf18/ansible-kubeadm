@@ -1,0 +1,15 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: kibana
+  annotations:
+    kubernetes.io/ingress.class: traefik
+spec:
+  rules:
+  - host: kibana.k8s.local
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: quickstart-kibana
+          servicePort: 5601

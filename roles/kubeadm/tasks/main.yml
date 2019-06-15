@@ -1,12 +1,19 @@
-- name: Disable SWAP since kubernetes can't work with swap enabled (1/2)
-  shell: |
-    swapoff -a
+- name: Disable swap
+  shell: swapoff -a
 
-- name: Disable SWAP in fstab since kubernetes can't work with swap enabled (2/2)
+- name: Disable swap permanently (modify /etc/fstab)
   replace:
     path: /etc/fstab
-    regexp: '^(.+?\sswap\s+sw\s+.*)$'
-    replace: '# \1'
+    regexp: '^(.*swap.*)$'
+    backup: yes
+    replace: '#\1'
+
+- name: set net.ipv4.ip_forward to 1
+  retries: 2
+  sysctl:
+    name: net.ipv4.ip_forward
+    value: 1
+    state: present
 
 - name: add Kubernetes apt-key
   apt_key:
@@ -19,19 +26,10 @@
     state: present
     filename: 'kubernetes'
 
-- name: install kubelet
+- name: "Install kubeadm and dependencies"
   apt:
-    name: kubelet=1.14.0-00
+    pkg:
+      - kubelet={{ kubernetes_version }}
+      - kubeadm={{ kubernetes_version }}
+      - kubectl={{ kubernetes_version }}
     state: present
-    update_cache: true
-
-- name: install kubeadm
-  apt:
-    name: kubeadm=1.14.0-00
-    state: present
-
-- name: install kubectl
-  apt:
-    name: kubectl=1.14.0-00
-    state: present
-    force: yes

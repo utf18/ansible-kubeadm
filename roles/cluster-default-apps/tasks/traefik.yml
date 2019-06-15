@@ -1,0 +1,21 @@
+- name: copy over files
+  copy:
+    src: traefik/
+    dest: /tmp/traefik/
+
+# helm template
+- name: helm template traefik
+  shell: |
+    helm template \
+      /tmp/charts/stable/traefik \
+      -f /tmp/traefik/values.yml \
+      > /tmp/traefik/traefik-templated.yml
+  args:
+    executable: /bin/bash
+
+# deploy traefik
+- name: kubectl apply /tmp/traefik/traefik-templated.yml
+  shell: "kubectl apply -f /tmp/traefik/traefik-templated.yml"
+
+#- name: install traefik as an ingress controller on port 80
+ # shell: kubectl apply -f https://raw.githubusercontent.com/containous/traefik/v1.7/examples/k8s/traefik-ds.yaml

@@ -10,13 +10,13 @@ the multinode playbook will follow eventually
 ## components
 
 - kubernetes 1.14
-- traefik with acme support
+- traefik
 - prometheus
 - grafana
 - elasticsearch
 - kibana
 - filebeat or fluentd
-- rook
+- openebs
 - minio
 - keycloak or dex
 

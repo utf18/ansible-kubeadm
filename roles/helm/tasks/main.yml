@@ -1,0 +1,29 @@
+- name: download helm zip
+  get_url:
+    url: https://storage.googleapis.com/kubernetes-helm/helm-{{ helm_version }}-linux-amd64.tar.gz
+    dest: /tmp/helm.tar.gz
+    mode: 0440
+
+- name: Wait until the file /tmp/helm.tar.gz is present
+  wait_for:
+    path: /tmp/helm.tar.gz
+    timeout: 20
+    delay: 2
+    msg: Timeout to find file /tmp/helm.tar.gz
+
+- name: unarchive helm archive
+  unarchive:
+    src: /tmp/helm.tar.gz
+    dest: /tmp/
+    remote_src: yes
+
+- name: Move helm binary to /usr/local/bin
+  command: mv /tmp/linux-amd64/helm /usr/local/bin/helm
+
+- name: make helm binary executable
+  file: dest=/usr/local/bin/ mode=+x
+
+# download official helm charts to /tmp
+- git:
+    repo: 'https://github.com/helm/charts.git'
+    dest: /tmp/charts

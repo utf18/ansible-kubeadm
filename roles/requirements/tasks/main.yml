@@ -12,4 +12,5 @@
       - git
       - sudo
       - lvm2
+      - open-iscsi
     state: present
