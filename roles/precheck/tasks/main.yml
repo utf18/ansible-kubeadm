@@ -1,0 +1,5 @@
+# depending on this check, cluster init and following steps are skipped
+- name: check if kubernetes is already initialized
+  stat: 
+    path: /etc/kubernetes/admin.conf
+  register: k8s_is_installed

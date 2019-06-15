@@ -1,0 +1,14 @@
+---
+# This playbook deploys a single node k8s cluster on debian
+- name: Install Kubernetes master
+  hosts: master
+  remote_user: root
+  roles:
+    - precheck
+    - requirements
+    - os-hardening
+    - user
+    - docker
+    - kubeadm
+    - cluster
+    - cluster-default-apps

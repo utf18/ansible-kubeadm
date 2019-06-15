@@ -1,0 +1,15 @@
+- name: "Install dependencies"
+  apt:
+    pkg:
+      - apt-transport-https
+      - python-apt
+      - python-minimal
+      - python3-pip
+      - ca-certificates
+      - gnupg2
+      - software-properties-common
+      - vim
+      - git
+      - sudo
+      - lvm2
+    state: present

@@ -1,3 +1,0 @@
-- name: Install and Update Python
-  raw: sudo bash -c "test -e /usr/bin/python || (apt -qqy update && apt install -qy python-minimal)"
- 
