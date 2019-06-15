@@ -1,0 +1,34 @@
+- name: initialize the cluster
+  shell: kubeadm init --pod-network-cidr=192.168.0.0/16
+  # skipping task if kubernetes is already initialzed
+  when: not k8s_is_installed.stat.exists
+
+- name: Wait until the file /etc/kubernetes/admin.conf is present before continuing
+  wait_for:
+    path: /etc/kubernetes/admin.conf
+    timeout: 20
+    delay: 10
+    msg: Timeout to find file /etc/kubernetes/admin.conf
+  # skipping task if kubernetes is already initialzed
+  when: not k8s_is_installed.stat.exists
+
+- name: create .kube directory
+  file:
+    path: /root/.kube
+    state: directory
+    mode: 0755
+  # skipping task if kubernetes is already initialzed
+  when: not k8s_is_installed.stat.exists
+
+- name: copy admin.conf to root user home folder
+  copy:
+    src: /etc/kubernetes/admin.conf
+    dest: /root/.kube/config
+    remote_src: yes
+  # skipping task if kubernetes is already initialzed
+  when: not k8s_is_installed.stat.exists
+
+- name: remove taint from master
+  shell: kubectl taint nodes --all node-role.kubernetes.io/master-
+  # skipping task if kubernetes is already initialzed
+  when: not k8s_is_installed.stat.exists

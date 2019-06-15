@@ -1,9 +1,19 @@
----
+- name: add Docker apt-key
+  apt_key:
+    url: https://download.docker.com/linux/debian/gpg
+    state: present
 
-- name: install docker
-  apt: package={{ item }} update_cache=yes
-  with_items:
-    - docker.io
+- name: add Docker's APT repository
+  apt_repository:
+    repo: deb https://download.docker.com/linux/debian stretch stable
+    state: present
+    filename: 'docker'
+
+- name: install Docker
+  apt:
+    name: docker-ce
+    state: present
+    update_cache: true
 
 - name: add remote user to group docker
   command: usermod -aG docker {{ansible_user}}
@@ -11,8 +21,6 @@
 - name: Start docker service
   systemd:
     name: docker
-    state: restarted
+    state: started
+    daemon_reload: yes
     enabled: yes
-
-- name: enable if command above does strange things (debug me)
-  command: systemctl enable docker

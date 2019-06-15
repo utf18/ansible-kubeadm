@@ -1,0 +1,13 @@
+- name: install calico as Pod network
+  shell: kubectl apply -f https://docs.projectcalico.org/v3.7/manifests/calico.yaml
+
+- name: install traefik as an ingress controller on port 80
+  shell: kubectl apply -f https://raw.githubusercontent.com/containous/traefik/v1.7/examples/k8s/traefik-ds.yaml
+
+# demo application
+- name: microbe
+  shell: kubectl apply -f https://raw.githubusercontent.com/ben-st/microbe/master/k8s-deployment/microbe.yml
+
+# logging operator elasticsearch + kibana
+- name: elastic operator
+  shell: kubectl apply -f https://download.elastic.co/downloads/eck/0.8.0/all-in-one.yaml
