@@ -1,18 +1,33 @@
-## standalone kubeadm deployment
+# Kubernetes cluster bootstrap with ansible and kubeadm
 
-- Requires Ansible 1.2 or newer
-- Expects 3 ubuntu nodes (at least 16.04)
-- Expects passwordless sudo
+this repo is an opinionated holistic aproach for a k8s cluster install.
 
-These playbooks deploy a very basic installation of kubeadm.
-To use them, first edit the "inventory" file to contain the
-hostnames of the machines on which you want kubeadm deployed, and edit the
-group_vars/ file to set any kubeadm configuration parameters you need.
+the debian-singleNode-playbook.yml will install a kubeadm based
+kubernetes cluster version 1.14 on a single node
 
-Then run the playbook, like this:
+the multinode playbook will follow eventually
 
-	`ansible-playbook -i inventory site.yml`
+## components
 
+- kubernetes 1.14
+- traefik with acme support
+- prometheus
+- grafana
+- elasticsearch
+- kibana
+- filebeat or fluentd
+- rook
+- minio
+- keycloak or dex
 
-This is a very simple playbook and could serve as a starting point for more
-complex projects.
+## getting started
+
+change your ip in the inventory
+
+Then run the playbook:
+
+`ansible-playbook -i inventory debian-singleNode-playbook.yml`
+
+## limitations
+
+right now it only runs on debian
