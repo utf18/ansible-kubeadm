@@ -1,6 +1,5 @@
 - import_tasks: calico.yml
 - import_tasks: traefik.yml
-- import_tasks: microbe.yml
 - import_tasks: elastic-operator.yml
 - import_tasks: openebs.yml
 - import_tasks: elasticsearch.yml
