@@ -1,7 +1,13 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+   name: microbe
+---
 apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
   name: microbe
+  namespace: microbe
 spec:
   replicas: 2
   selector:
@@ -20,6 +26,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: microbe
+  namespace: microbe
 spec:
   ports:
   - name: http
@@ -32,6 +39,7 @@ apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
   name: microbe
+  namespace: microbe
   annotations:
     kubernetes.io/ingress.class: traefik
 spec:

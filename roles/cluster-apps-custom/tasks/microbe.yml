@@ -3,6 +3,6 @@
     src: microbe/
     dest: /tmp/microbe/
 
-# deploy elasticsearch crd
+# deploy microbe
 - name: kubectl apply /tmp/microbe//microbe/microbe.yml
   shell: "kubectl apply -f /tmp/microbe//microbe/microbe.yml"

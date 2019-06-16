@@ -12,4 +12,5 @@
     - kubeadm
     - helm
     - cluster
-    - cluster-default-apps
+    - cluster-apps-default
+    - cluster-apps-custom
