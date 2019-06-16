@@ -4,5 +4,5 @@
     dest: /tmp/microbe/
 
 # deploy microbe
-- name: kubectl apply /tmp/microbe//microbe/microbe.yml
-  shell: "kubectl apply -f /tmp/microbe//microbe/microbe.yml"
+- name: kubectl apply /tmp/microbe/microbe.yml
+  shell: "kubectl apply -f /tmp/microbe//microbe.yml"
