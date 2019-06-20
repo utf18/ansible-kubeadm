@@ -1,0 +1,8 @@
+# create all the basic namespaces
+- name: copy namespace definitions to /tmp
+  copy:
+    src: namespaces
+    dest: /tmp/
+
+- name: apply namespace definitions
+  shell: kubectl apply -f /tmp/namespaces/

@@ -15,8 +15,11 @@
     state: present
     update_cache: true
 
-- name: add remote user to group docker
-  command: usermod -aG docker {{ansible_user}}
+- name: adding existing user "{{ ansible_user }}" to group docker
+  user:
+    name: "{{ ansible_user }}"
+    groups: docker
+    append: yes
 
 - name: Start docker service
   systemd:

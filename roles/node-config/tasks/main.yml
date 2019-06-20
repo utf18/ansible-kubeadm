@@ -2,6 +2,6 @@
 - import_tasks: required-packages.yml
 - import_tasks: hardening.yml
 - import_tasks: nameservers.yml
-- import_tasks: user-config.yml
 - import_tasks: docker.yml
 - import_tasks: k8s-config.yml
+- import_tasks: user-config.yml

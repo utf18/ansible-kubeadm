@@ -11,3 +11,9 @@
   authorized_key: user=k8s key="{{item}}"
   with_file:
     - ~/.ssh/id_rsa.pub
+
+- name: adding existing user k8s to group docker
+  user:
+    name: k8s
+    groups: docker
+    append: yes
