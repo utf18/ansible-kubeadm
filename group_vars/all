@@ -3,5 +3,4 @@ kubeadm_token: decaf2.c61dd19a426515ec
 
 master_ip: "{{ hostvars['master1']['ansible_eth0']['ipv4']['address'] }}"
 
-kubernetes_version: 1.14.0-00
-helm_version: v2.14.1
+

@@ -18,7 +18,8 @@ the multinode playbook will follow eventually
 - filebeat or fluentd
 - openebs
 - minio
-- keycloak or dex
+- keycloak
+- vault
 
 ## getting started
 

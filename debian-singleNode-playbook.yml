@@ -4,13 +4,7 @@
   hosts: master
   remote_user: root
   roles:
-    - precheck
-    - requirements
-    - os-hardening
-    - user
-    - docker
-    - kubeadm
-    - helm
-    - cluster
+    - node-config
+    - master
     - cluster-apps-default
     - cluster-apps-custom

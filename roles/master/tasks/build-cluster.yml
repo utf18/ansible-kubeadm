@@ -1,8 +1,18 @@
+# depending on this check, cluster init and following steps are skipped
+- name: check if kubernetes is already initialized
+  stat: 
+    path: /etc/kubernetes/admin.conf
+  register: k8s_is_installed
+
+# initialize cluster
 - name: initialize the cluster
+  # pod cidr is for calico, could be made available via inventory
   shell: kubeadm init --pod-network-cidr=192.168.0.0/16
   # skipping task if kubernetes is already initialzed
   when: not k8s_is_installed.stat.exists
 
+# if we don't wait here a little while, anislbe will fail the copy job below
+# due to missing file, since it is still creating by then
 - name: Wait until the file /etc/kubernetes/admin.conf is present before continuing
   wait_for:
     path: /etc/kubernetes/admin.conf
@@ -12,6 +22,7 @@
   # skipping task if kubernetes is already initialzed
   when: not k8s_is_installed.stat.exists
 
+# create kubectl config folder
 - name: create .kube directory
   file:
     path: /root/.kube
@@ -20,6 +31,7 @@
   # skipping task if kubernetes is already initialzed
   when: not k8s_is_installed.stat.exists
 
+# make kubectl work without setting kubeconfig via env
 - name: copy admin.conf to root user home folder
   copy:
     src: /etc/kubernetes/admin.conf
@@ -28,6 +40,7 @@
   # skipping task if kubernetes is already initialzed
   when: not k8s_is_installed.stat.exists
 
+# enable workload on kubernetes master
 - name: remove taint from master
   shell: kubectl taint nodes --all node-role.kubernetes.io/master-
   # skipping task if kubernetes is already initialzed
