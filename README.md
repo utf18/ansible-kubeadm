@@ -1,5 +1,7 @@
 # Kubernetes cluster bootstrap with ansible and kubeadm
 
+## Work in Progress! Do not use this in production until it reaches a stable version/tag
+
 this repo is an opinionated holistic aproach for a k8s cluster install.
 
 the debian-singleNode-playbook.yml will install a kubeadm based
