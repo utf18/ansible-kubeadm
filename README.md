@@ -2,7 +2,11 @@
 
 ## Work in Progress! Do not use this in production until it reaches a stable version/tag
 
-this repo is an opinionated holistic aproach for a k8s cluster install.
+## if you need the old version of this repo checkout the 1.0 release
+
+https://github.com/ben-st/ansible-kubeadm/releases
+
+## this repo is an opinionated holistic aproach for a k8s cluster install.
 
 the debian-singleNode-playbook.yml will install a kubeadm based
 kubernetes cluster version 1.14 on a single node
