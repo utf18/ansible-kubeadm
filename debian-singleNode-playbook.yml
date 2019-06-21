@@ -8,3 +8,4 @@
     - master
     - cluster-apps-default
     - cluster-apps-custom
+    - post-install

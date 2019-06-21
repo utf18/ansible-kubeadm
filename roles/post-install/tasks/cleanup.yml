@@ -1,0 +1,5 @@
+# remove templates and files from deployment
+- name: remove /tmp/cluster-install
+  file:
+    path: /tmp/cluster-install
+    state: absent
