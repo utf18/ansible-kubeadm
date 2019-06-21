@@ -2,6 +2,7 @@ apiVersion: kibana.k8s.elastic.co/v1alpha1
 kind: Kibana
 metadata:
   name: quickstart
+  namespace: logging
 spec:
   version: "7.1.0"
   nodeCount: 1

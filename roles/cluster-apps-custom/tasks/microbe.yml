@@ -1,8 +1,8 @@
 - name: copy over microbe files
   copy:
     src: microbe/
-    dest: /tmp/microbe/
+    dest: /tmp/cluster-install/microbe/
 
 # deploy microbe
-- name: kubectl apply /tmp/microbe/microbe.yml
-  shell: "kubectl apply -f /tmp/microbe//microbe.yml"
+- name: kubectl apply /tmp/cluster-install/microbe/microbe.yml
+  shell: "kubectl apply -f /tmp/cluster-install/microbe//microbe.yml"

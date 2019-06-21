@@ -1,0 +1,5 @@
+- name: Create tmp directory for all cluster-install related files
+  file:
+    path: /tmp/cluster-install
+    state: directory
+    mode: '0755'

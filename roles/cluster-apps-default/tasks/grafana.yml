@@ -1,0 +1,19 @@
+- name: copy files
+  copy:
+    src: grafana/
+    dest: /tmp/cluster-install/grafana/
+
+# helm template
+- name: helm template grafana
+  shell: |
+    helm template \
+      --name grafana --namespace monitoring \
+      /tmp/cluster-install/charts/stable/grafana \
+      -f /tmp/cluster-install/grafana/values.yml \
+      > /tmp/cluster-install/grafana/grafana-templated.yml
+  args:
+    executable: /bin/bash
+
+# deploy grafana
+- name: kubectl apply /tmp/cluster-install/grafana/grafana-templated.yml
+  shell: "kubectl apply -f /tmp/cluster-install/grafana/grafana-templated.yml"

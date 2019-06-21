@@ -5,7 +5,7 @@ this repo is an opinionated holistic aproach for a k8s cluster install.
 the debian-singleNode-playbook.yml will install a kubeadm based
 kubernetes cluster version 1.14 on a single node
 
-the multinode playbook will follow eventually
+the multinode playbook will follow some time soon
 
 ## components
 

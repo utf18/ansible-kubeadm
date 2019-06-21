@@ -1,8 +1,8 @@
 # create all the basic namespaces
-- name: copy namespace definitions to /tmp
+- name: copy namespace definitions to /tmp/cluster-install/
   copy:
     src: namespaces
-    dest: /tmp/
+    dest: /tmp/cluster-install/
 
 - name: apply namespace definitions
-  shell: kubectl apply -f /tmp/namespaces/
+  shell: kubectl apply -f /tmp/cluster-install/namespaces/

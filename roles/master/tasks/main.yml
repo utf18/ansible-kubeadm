@@ -1,3 +1,4 @@
+- import_tasks: create-folders.yml
 - import_tasks: build-cluster.yml
 - import_tasks: helm-config.yml
 - import_tasks: namespaces.yml

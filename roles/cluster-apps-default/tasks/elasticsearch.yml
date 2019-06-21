@@ -1,16 +1,16 @@
-- name: copy over elasticsearch files
+- name: copy elasticsearch files
   copy:
     src: elasticsearch/
-    dest: /tmp/elasticsearch/
+    dest: /tmp/cluster-install/elasticsearch/
 
 # deploy elasticsearch crd
-- name: kubectl apply /tmp/elasticsearch/elastic-crd.yml
-  shell: "kubectl apply -f /tmp/elasticsearch/elastic-crd.yml"
+- name: kubectl apply /tmp/cluster-install/elasticsearch/elastic-crd.yml
+  shell: "kubectl apply -f /tmp/cluster-install/elasticsearch/elastic-crd.yml"
 
 # deploy kibana crd
-- name: kubectl apply /tmp/elasticsearch/kibana-crd.yml
-  shell: "kubectl apply -f /tmp/elasticsearch/kibana-crd.yml"
+- name: kubectl apply /tmp/cluster-install/elasticsearch/kibana-crd.yml
+  shell: "kubectl apply -f /tmp/cluster-install/elasticsearch/kibana-crd.yml"
 
 # deploy kibana ingress
-- name: kubectl apply /tmp/elasticsearch/kibana-ingress.yml
-  shell: "kubectl apply -f /tmp/elasticsearch/kibana-ingress.yml"
+- name: kubectl apply /tmp/cluster-install/elasticsearch/kibana-ingress.yml
+  shell: "kubectl apply -f /tmp/cluster-install/elasticsearch/kibana-ingress.yml"

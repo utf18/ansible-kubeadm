@@ -1,5 +1,5 @@
 # install system packages and additional ones
-- name: "Install dependencies"
+- name: "Install dependencies, this may take a moment depending on disk and network connection"
   apt:
     pkg:
       - apt-transport-https

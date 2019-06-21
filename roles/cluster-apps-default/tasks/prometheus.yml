@@ -1,0 +1,19 @@
+- name: copy files
+  copy:
+    src: prometheus/
+    dest: /tmp/cluster-install/prometheus/
+
+# helm template
+- name: helm template prometheus
+  shell: |
+    helm template \
+      --name prometheus \
+      /tmp/cluster-install/charts/stable/prometheus \
+      -f /tmp/cluster-install/prometheus/values.yml \
+      > /tmp/cluster-install/prometheus/prometheus-templated.yml
+  args:
+    executable: /bin/bash
+
+# deploy prometheus
+- name: kubectl apply /tmp/cluster-install/prometheus/prometheus-templated.yml
+  shell: "kubectl apply -f /tmp/cluster-install/prometheus/prometheus-templated.yml"
