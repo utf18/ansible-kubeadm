@@ -1,0 +1,8 @@
+# create all the basic namespaces
+- name: "copy local storage definition to {{ template_dir }}"
+  copy:
+    src: local-storage
+    dest: "{{ template_dir }}"
+
+- name: apply namespace definitions
+  shell: "kubectl apply -f {{ template_dir }}/local-storage/"

@@ -12,7 +12,7 @@
   retries: 2
   sysctl:
     name: net.ipv4.ip_forward
-    value: 1
+    value: '1'
     state: present
 
 - name: add Kubernetes apt-key
@@ -33,3 +33,9 @@
       - kubeadm={{ kubernetes_version }}
       - kubectl={{ kubernetes_version }}
     state: present
+
+- name: Create the directory for the manual storage class
+  file:
+    path: /opt/k8s-manual
+    state: directory
+    mode: '0755'

@@ -1,2 +1,3 @@
 - import_tasks: cleanup.yml
 - import_tasks: restart-services.yml
+- import_tasks: delete-deployment-tests.yml

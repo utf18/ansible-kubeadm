@@ -1,0 +1,8 @@
+# delete failed bats tests
+- name: delete grafana bats test
+  shell: "kubectl delete po -n monitoring grafana-test"
+  ignore_errors: yes
+
+- name: delete traefik bats test
+  shell: "kubectl delete po -n traefik traefik-test"
+  ignore_errors: yes

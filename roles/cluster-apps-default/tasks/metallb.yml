@@ -1,0 +1,27 @@
+- name: create template dir
+  file:
+    path: "{{ template_dir }}/metallb"
+    state: directory
+    mode: '0755'
+
+- name: template and copy metallb values
+  template:
+    src: metallb/values.j2
+    dest: "{{ template_dir }}/metallb/values.yml"
+    mode: 0775
+
+# helm template
+- name: helm template metallb
+  shell: |
+    helm template \
+      --name metallb \
+      --namespace metallb \
+      "{{ template_dir }}/charts/stable/metallb" \
+      -f "{{ template_dir }}/metallb/values.yml" \
+      > "{{ template_dir }}/metallb/metallb-templated.yml"
+  args:
+    executable: /bin/bash
+
+# deploy metallb
+- name: kubectl apply "{{ template_dir }}/metallb/metallb-templated.yml"
+  shell: "kubectl apply -n metallb -f {{ template_dir }}/metallb/metallb-templated.yml"

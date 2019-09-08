@@ -1,0 +1,27 @@
+---
+- name: Bootstrap Tasks
+  hosts: all
+  become: yes
+  gather_facts: False
+  roles:
+    - node-config
+
+- name: Install and init master
+  hosts: master
+  become: yes
+  roles:
+    - master
+
+- name: Install and join nodes
+  become: yes
+  hosts: node
+  roles:
+    - worker
+
+- name: deploy apps
+  hosts: master
+  become: yes
+  roles:
+    - cluster-apps-default
+    - cluster-apps-custom
+    - post-install

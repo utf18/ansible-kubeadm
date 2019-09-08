@@ -9,11 +9,11 @@
     state: present
     filename: 'docker'
 
-- name: install Docker
+- name: "Install Docker with specific version"
   apt:
-    name: docker-ce
+    pkg:
+      - docker-ce={{ docker_version }}
     state: present
-    update_cache: true
 
 - name: adding existing user "{{ ansible_user }}" to group docker
   user:

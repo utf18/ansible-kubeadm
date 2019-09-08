@@ -1,0 +1,8 @@
+- name: copy files
+  copy:
+    src: flannel/
+    dest: "{{ template_dir }}/flannel/"
+
+# deploy flannel
+- name: "kubectl apply {{ template_dir }}/flannel/flannel.yml"
+  shell: "kubectl apply -f {{ template_dir }}/flannel"

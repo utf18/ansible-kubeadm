@@ -1,0 +1,9 @@
+# depending on this check, cluster join will be skipped
+- name: check if kubernetes is already initialized
+  stat: 
+    path: /etc/kubernetes/kubelet.conf
+  register: k8s_is_installed
+
+- name: join cluster
+  shell: kubeadm join "{{ hostvars['master']['ansible_eth0']['ipv4']['address'] }}":6443 --token {{ kubeadm_token }} --discovery-token-unsafe-skip-ca-verification
+  when: not k8s_is_installed.stat.exists

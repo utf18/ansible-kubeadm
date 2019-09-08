@@ -1,8 +1,0 @@
-# maybe use if it errors
-- name: remove ipv6 nameserver entries from /etc/resolv.conf
-  tags: ["trim-resolv-conf"]
-  replace:
-    path: /etc/resolv.conf
-    regexp: '^nameserver\s+[a-zA-Z0-9\:]+\s*$'
-    replace: ''
-    backup: yes

@@ -10,8 +10,8 @@
       - gnupg2
       - software-properties-common
       - vim
+      - nfs-common
       - git
       - sudo
       - lvm2
-      - open-iscsi
     state: present

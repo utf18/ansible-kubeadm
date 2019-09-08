@@ -8,33 +8,41 @@ https://github.com/ben-st/ansible-kubeadm/releases
 
 ## this repo is an opinionated holistic aproach for a k8s cluster install.
 
-the debian-singleNode-playbook.yml will install a kubeadm based
-kubernetes cluster version 1.14 on a single node
-
-the multinode playbook will follow some time soon
+the install-all.yml will install a kubernetes 1.15 cluster with kubeadm and the components below.
+Right now it is only tested on ubuntu 18.04
 
 ## components
 
-- kubernetes 1.14
+- kubernetes 1.15
+- flannel
+- metallb
 - traefik
 - prometheus
 - grafana
 - elasticsearch
+- filebeat
 - kibana
-- filebeat or fluentd
-- openebs
-- minio
-- keycloak
-- vault
+
+## Requirements
+
+an nfs server to use for persistence
+You can install one on the k8s-master with the playbook
+
+`ansible-playbook -i inventories/<example-inventory>/ install-nfs-on-master.yml`
+
 
 ## getting started
 
-change your ip in the inventory
+create your inventory from the example-inventory or edit the values directly
+
+generate yourself a new cluster join token and insert it in the inventory with
+
+`kubeadm token generate`
 
 Then run the playbook:
 
-`ansible-playbook -i inventory debian-singleNode-playbook.yml`
+`ansible-playbook -i inventories/<example-inventory>/ install-all.yml`
 
-## limitations
+if you want to just deploy and not run all the other tasks run
 
-right now it only runs on debian
+`ansible-playbook -i inventories/<example-inventory>/ deploy-all.yml`

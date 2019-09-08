@@ -1,0 +1,15 @@
+all:
+  hosts:
+    # ip or your master 
+    master:
+      ansible_connection: ssh
+      ansible_user: ubuntu # Remote user
+      ansible_host: <ip> # Remote host
+      ansible_port: 22
+    # if of your node
+    node:
+      ansible_connection: ssh
+      ansible_user: ubuntu # Remote user
+      ansible_host: <ip> # Remote host
+      ansible_port: 22
+    

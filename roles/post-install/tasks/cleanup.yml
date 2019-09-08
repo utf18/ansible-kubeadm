@@ -1,5 +1,5 @@
 # remove templates and files from deployment
-- name: remove /tmp/cluster-install
+- name: "remove {{ template_dir }}"
   file:
-    path: /tmp/cluster-install
+    path: "{{ template_dir }}"
     state: absent

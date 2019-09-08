@@ -1,5 +1,5 @@
 - name: Create tmp directory for all cluster-install related files
   file:
-    path: /tmp/cluster-install
+    path: "{{ template_dir }}"
     state: directory
     mode: '0755'

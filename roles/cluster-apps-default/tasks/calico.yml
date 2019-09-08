@@ -1,8 +1,0 @@
-- name: copy files
-  copy:
-    src: calico/
-    dest: /tmp/cluster-install/calico/
-
-# deploy calico
-- name: kubectl apply /tmp/cluster-install/calico/calico.yml
-  shell: "kubectl apply -f /tmp/cluster-install/calico/calico.yml"

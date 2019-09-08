@@ -1,6 +1,0 @@
-
-kubeadm_token: decaf2.c61dd19a426515ec
-
-master_ip: "{{ hostvars['master1']['ansible_eth0']['ipv4']['address'] }}"
-
-

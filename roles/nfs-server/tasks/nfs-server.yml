@@ -1,0 +1,26 @@
+# install nfs packages
+- name: "Install dependencies, this may take a moment depending on disk and network connection"
+  apt:
+    pkg:
+      - nfs-kernel-server
+      - nfs-common
+    state: present
+
+- name: create nfs storage dir
+  file:
+    path: "{{ nfs_storage_dir }}"
+    state: directory
+    mode: '0755'
+    owner: "root"
+
+- name: template and copy exports
+  template:
+    src: templates/exports.j2
+    dest: /etc/exports
+    mode: 0775
+    owner: "root"
+
+- name: restart nfs server
+  service: 
+    name: nfs-kernel-server 
+    state: restarted

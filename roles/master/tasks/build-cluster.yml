@@ -7,7 +7,7 @@
 # initialize cluster
 - name: initialize the cluster
   # pod cidr is for calico, could be made available via inventory
-  shell: kubeadm init --pod-network-cidr=192.168.0.0/16
+  shell: "kubeadm init --pod-network-cidr={{ pod_network_cidr }} --token {{ kubeadm_token }}"
   # skipping task if kubernetes is already initialzed
   when: not k8s_is_installed.stat.exists
 
@@ -22,8 +22,28 @@
   # skipping task if kubernetes is already initialzed
   when: not k8s_is_installed.stat.exists
 
-# create kubectl config folder
-- name: create .kube directory
+# create kubectl config folder for user ubuntu
+- name: create .kube directory for user ubuntu
+  file:
+    path: /home/ubuntu/.kube
+    state: directory
+    mode: 0755
+    owner: ubuntu
+  # skipping task if kubernetes is already initialzed
+  when: not k8s_is_installed.stat.exists
+
+# make kubectl work without setting kubeconfig via env
+- name: copy admin.conf to user home folder
+  copy:
+    src: /etc/kubernetes/admin.conf
+    dest: /home/ubuntu/.kube/config
+    owner: ubuntu
+    remote_src: yes
+  # skipping task if kubernetes is already initialzed
+  when: not k8s_is_installed.stat.exists
+
+# create kubectl config folder for user root
+- name: create .kube directory for user root
   file:
     path: /root/.kube
     state: directory
@@ -37,11 +57,5 @@
     src: /etc/kubernetes/admin.conf
     dest: /root/.kube/config
     remote_src: yes
-  # skipping task if kubernetes is already initialzed
-  when: not k8s_is_installed.stat.exists
-
-# enable workload on kubernetes master
-- name: remove taint from master
-  shell: kubectl taint nodes --all node-role.kubernetes.io/master-
   # skipping task if kubernetes is already initialzed
   when: not k8s_is_installed.stat.exists

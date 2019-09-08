@@ -1,18 +1,18 @@
 - name: copy over files
   copy:
     src: metrics-server/
-    dest: /tmp/cluster-install/metrics-server/
+    dest: "{{ template_dir }}/metrics-server/"
 
 # helm template
 - name: helm template metrics-server
   shell: |
     helm template --name metrics-server \
-      /tmp/cluster-install/charts/stable/metrics-server \
-      -f /tmp/cluster-install/metrics-server/values.yml \
-      > /tmp/cluster-install/metrics-server/metrics-server-templated.yml
+      "{{ template_dir }}/charts/stable/metrics-server" \
+      -f "{{ template_dir }}/metrics-server/values.yml" \
+      > "{{ template_dir }}/metrics-server/metrics-server-templated.yml"
   args:
     executable: /bin/bash
 
 # deploy metrics-server
-- name: kubectl apply /tmp/cluster-install/metrics-server/metrics-server-templated.yml
-  shell: "kubectl apply -f /tmp/cluster-install/metrics-server/metrics-server-templated.yml"
+- name: kubectl apply "{{ template_dir }}/metrics-server/metrics-server-templated.yml"
+  shell: "kubectl apply -n kube-system -f {{ template_dir }}/metrics-server/metrics-server-templated.yml"

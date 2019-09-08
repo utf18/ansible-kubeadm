@@ -1,22 +1,27 @@
-- name: copy files
-  copy:
-    src: traefik/
-    dest: /tmp/cluster-install/traefik/
+- name: create template dir
+  file:
+    path: "{{ template_dir }}/traefik"
+    state: directory
+    mode: '0755'
+
+- name: template and copy traefik values
+  template:
+    src: traefik/values.j2
+    dest: "{{ template_dir }}/traefik/values.yml"
+    mode: 0775
 
 # helm template
 - name: helm template traefik
   shell: |
     helm template \
-      --name traefik --namespace kube-system \
-      /tmp/cluster-install/charts/stable/traefik \
-      -f /tmp/cluster-install/traefik/values.yml \
-      > /tmp/cluster-install/traefik/traefik-templated.yml
+      --name traefik \
+      --namespace traefik \
+      "{{ template_dir }}/charts/stable/traefik" \
+      -f "{{ template_dir }}/traefik/values.yml" \
+      > "{{ template_dir }}/traefik/traefik-templated.yml"
   args:
     executable: /bin/bash
 
 # deploy traefik
-- name: kubectl apply /tmp/cluster-install/traefik/traefik-templated.yml
-  shell: "kubectl apply -f /tmp/cluster-install/traefik/traefik-templated.yml"
-
-#- name: install traefik as an ingress controller on port 80
- # shell: kubectl apply -f https://raw.githubusercontent.com/containous/traefik/v1.7/examples/k8s/traefik-ds.yaml
+- name: kubectl apply "{{ template_dir }}/traefik/traefik-templated.yml"
+  shell: "kubectl apply -n traefik -f {{ template_dir }}/traefik/traefik-templated.yml"
