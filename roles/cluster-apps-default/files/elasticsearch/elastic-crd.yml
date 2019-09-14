@@ -14,6 +14,7 @@ spec:
       node.data: true
       node.ingest: true
       node.ml: true
+      xpack.license.self_generated.type: basic
     podTemplate:
       metadata:
         labels:
@@ -25,7 +26,7 @@ spec:
           # specify resource limits and requests
           resources:
             limits:
-              memory: 8Gi
+              memory: 10Gi
               cpu: 2
           env:
           - name: ES_JAVA_OPTS

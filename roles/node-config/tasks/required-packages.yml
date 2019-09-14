@@ -5,9 +5,8 @@
       - apt-transport-https
       - python-apt
       - python-minimal
-      - python3-pip
       - ca-certificates
-      - gnupg2
+      - gnupg
       - software-properties-common
       - vim
       - nfs-common

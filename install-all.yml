@@ -1,6 +1,8 @@
 ---
 - name: Bootstrap Tasks
-  hosts: all
+  hosts: 
+    - node
+    - master
   become: yes
   gather_facts: False
   roles:

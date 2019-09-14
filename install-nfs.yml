@@ -1,6 +1,6 @@
 ---
 - name: Bootstrap Tasks
-  hosts: master
+  hosts: nfs
   become: yes
   gather_facts: true
   roles:

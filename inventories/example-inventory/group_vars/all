@@ -6,6 +6,7 @@ kubeadm_token: <your-join-token> # you can create one with kubeadm token generat
 master_ip: "{{ hostvars['master1']['ansible_eth0']['ipv4']['address'] }}"
 pod_network_cidr: 10.244.0.0/16
 nfs_storage_dir: /opt/k8s
-nfs_server: <nfs server ip>
-metallb_ip_range: <metallb ip range>
+nfs_server: <nfs server ip> # e.g 192.168.0.2
+nfs_ip_range: <nfs server allowed ip's> # eg. 192.168.0.0/24
+metallb_ip_range: <metallb ip range> # e.g. 192.168.0.240-192.168.0.250
 template_dir: /tmp/cluster-install

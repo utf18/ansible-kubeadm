@@ -12,4 +12,8 @@ all:
       ansible_user: ubuntu # Remote user
       ansible_host: <ip> # Remote host
       ansible_port: 22
-    
+    nfs:
+      ansible_connection: ssh
+      ansible_user: ubuntu # Remote user
+      ansible_host: <ip> # Remote host
+      ansible_port: 22
