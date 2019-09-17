@@ -4,6 +4,10 @@
     path: /etc/kubernetes/kubelet.conf
   register: k8s_is_installed
 
+# output will be a list of master ips, which we will split in the next step and return always the first entry
+- name: Create List of masters
+  set_fact: master_ips="{{ groups['masters']| map('extract', hostvars, ['ansible_host']) | join(',') }}"
+
 - name: join cluster
-  shell: kubeadm join "{{ hostvars['master']['ansible_eth0']['ipv4']['address'] }}":6443 --token {{ kubeadm_token }} --discovery-token-unsafe-skip-ca-verification
+  shell: kubeadm join "{{ master_ips.split(',')[0] }}":6443 --token {{ kubeadm_token }} --discovery-token-unsafe-skip-ca-verification
   when: not k8s_is_installed.stat.exists
