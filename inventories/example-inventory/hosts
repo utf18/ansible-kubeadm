@@ -1,19 +1,24 @@
 all:
+  vars:
+    host_key_checking: False
+    ansible_user: ubuntu # Remote user
+    ansible_port: 22
   hosts:
-    # ip or your master 
-    master:
-      ansible_connection: ssh
-      ansible_user: ubuntu # Remote user
-      ansible_host: <ip> # Remote host
-      ansible_port: 22
-    # if of your node
-    node:
-      ansible_connection: ssh
-      ansible_user: ubuntu # Remote user
-      ansible_host: <ip> # Remote host
-      ansible_port: 22
+  children:
+    masters:
+      hosts:
+        master1:
+          ansible_host: <e.g. 192.168.0.10> # Remote host
+    nodes:
+      hosts:
+        node1:
+          ansible_host: <e.g. 192.168.0.11> # Remote host
+        node2:
+          ansible_host: <e.g. 192.168.0.12> # Remote host
     nfs:
-      ansible_connection: ssh
-      ansible_user: ubuntu # Remote user
-      ansible_host: <ip> # Remote host
-      ansible_port: 22
+      hosts:
+        nfs1:
+          ansible_connection: ssh
+          ansible_user: ubuntu # Remote user
+          ansible_host: <e.g. 192.168.0.09> # Remote host
+          ansible_port: 22    

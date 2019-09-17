@@ -3,7 +3,6 @@ helm_version: v2.14.1
 docker_version: 5:18.09.9~3-0~debian-stretch
 domain: <your-domain-name e.g. github.com>
 kubeadm_token: <your-join-token> # you can create one with kubeadm token generate
-master_ip: "{{ hostvars['master1']['ansible_eth0']['ipv4']['address'] }}"
 pod_network_cidr: 10.244.0.0/16
 nfs_storage_dir: /opt/k8s
 nfs_server: <nfs server ip> # e.g 192.168.0.2
