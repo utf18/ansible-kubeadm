@@ -1,6 +1,6 @@
 # Kubernetes cluster bootstrap with ansible and kubeadm
 
-## Work in Progress! Do not use this in production until it reaches a stable version/tag
+## Work in Progress! Do not use this in production until it reaches a stable 2.X version/tag
 
 ## if you need the old version of this repo checkout the 1.0 release
 
