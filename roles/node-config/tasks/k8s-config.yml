@@ -33,9 +33,3 @@
       - kubeadm={{ kubernetes_version }}
       - kubectl={{ kubernetes_version }}
     state: present
-
-- name: Create the directory for the manual storage class
-  file:
-    path: /opt/k8s-manual
-    state: directory
-    mode: '0755'

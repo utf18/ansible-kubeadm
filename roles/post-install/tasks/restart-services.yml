@@ -1,5 +1,0 @@
-# restart ssh service after altering config
-- name: restart ssh
-  systemd:
-    state: restarted
-    name: ssh

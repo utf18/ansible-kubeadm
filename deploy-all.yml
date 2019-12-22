@@ -1,9 +1,0 @@
----
-- name: Bootstrap Tasks
-  hosts: master
-  become: yes
-  gather_facts: true
-  roles:
-    - cluster-apps-default
-    - cluster-apps-custom
-    - post-install

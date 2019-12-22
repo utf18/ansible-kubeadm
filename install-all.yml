@@ -19,11 +19,3 @@
   hosts: nodes
   roles:
     - worker
-
-- name: deploy apps
-  hosts: masters
-  become: yes
-  roles:
-    - cluster-apps-default
-    - cluster-apps-custom
-    - post-install

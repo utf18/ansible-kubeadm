@@ -1,7 +1,0 @@
-# logging operator elasticsearch + kibana
-- name: elastic operator
-  shell: kubectl apply -f https://download.elastic.co/downloads/eck/0.9.0/all-in-one.yaml
-
-# wait for crd's to become ready
-- pause:
-    seconds: 30

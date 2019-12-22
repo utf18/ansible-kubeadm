@@ -1,7 +1,0 @@
----
-- name: Bootstrap Tasks
-  hosts: nfs
-  become: yes
-  gather_facts: true
-  roles:
-    - nfs-server

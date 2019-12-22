@@ -8,17 +8,16 @@ all:
     masters:
       hosts:
         master1:
-          ansible_host: <e.g. 192.168.0.10> # Remote host
+          ansible_host: k8s-master01
+          #ansible_host: <master-ip> 
     nodes:
       hosts:
         node1:
-          ansible_host: <e.g. 192.168.0.11> # Remote host
+          ansible_host: k8s-node01 
+          #ansible_host: <node-ip>
         node2:
-          ansible_host: <e.g. 192.168.0.12> # Remote host
-    nfs:
-      hosts:
-        nfs1:
-          ansible_connection: ssh
-          ansible_user: ubuntu # Remote user
-          ansible_host: <e.g. 192.168.0.09> # Remote host
-          ansible_port: 22    
+          ansible_host: k8s-node02
+          #ansible_host: <node-ip>
+        node3:
+          ansible_host: k8s-node03 
+          #ansible_host: <node-ip>

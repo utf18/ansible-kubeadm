@@ -1,5 +1,0 @@
-# remove templates and files from deployment
-- name: "remove {{ template_dir }}"
-  file:
-    path: "{{ template_dir }}"
-    state: absent

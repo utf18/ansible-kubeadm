@@ -1,5 +1,10 @@
 - name: create the 'k8s' user
-  user: name=k8s append=yes state=present createhome=yes shell=/bin/bash
+  user: 
+    name: k8s 
+    append: yes 
+    state: present 
+    createhome: yes 
+    shell: /bin/bash
 
 - name: allow 'k8s' to have passwordless sudo
   lineinfile:
@@ -8,7 +13,9 @@
     validate: 'visudo -cf %s'
 
 - name: set up authorized keys for the k8s user
-  authorized_key: user=k8s key="{{item}}"
+  authorized_key: 
+    user: k8s 
+    key: "{{item}}"
   with_file:
     - ~/.ssh/id_rsa.pub
 

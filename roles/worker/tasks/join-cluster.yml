@@ -4,7 +4,7 @@
     path: /etc/kubernetes/kubelet.conf
   register: k8s_is_installed
 
-# output will be a list of master ips, which we will split in the next step and return always the first entry
+# output will be a list of master ips, which we will split in the next step and return the first entry
 - name: Create List of masters
   set_fact: master_ips="{{ groups['masters']| map('extract', hostvars, ['ansible_host']) | join(',') }}"
 

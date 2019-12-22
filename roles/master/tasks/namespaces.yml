@@ -1,8 +1,0 @@
-# create all the basic namespaces
-- name: "copy namespace definitions to {{ template_dir }}/"
-  copy:
-    src: namespaces
-    dest: "{{ template_dir }}"
-
-- name: apply namespace definitions
-  shell: "kubectl apply -f {{ template_dir }}/namespaces/"
