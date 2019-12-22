@@ -1,10 +1,7 @@
 # Kubernetes cluster bootstrap with ansible and kubeadm
 
-## Work in Progress! Do not use this in production until it reaches a stable 2.X version/tag
+the install-all.yml will install a kubernetes 1.17 cluster with kubeadm and flannel.
 
-https://github.com/utf18/ansible-kubeadm/releases
-
-the install-all.yml will install a kubernetes 1.17 cluster with kubeadm and flannel
 Right now it is only tested on ubuntu 18.04
 
 ## components
